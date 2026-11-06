@@ -1,0 +1,46 @@
+{
+  "_leia": "termos = o que buscar no Maps. categorias = regex que a categoria do resultado precisa casar; o Google devolve coisa fora do assunto quando acaba o relevante, e este filtro corta.",
+  "cidades": [
+    "Sua Cidade UF",
+    "Cidade Vizinha UF"
+  ],
+  "segmentos": {
+    "clinicas": {
+      "termos": [
+        "clínica odontológica",
+        "clínica de estética",
+        "harmonização facial"
+      ],
+      "categorias": "dentista|odontol|est[ée]tic|dermatolog|ortodont|implante|harmoniza|cl[íi]nica m[ée]dica"
+    },
+    "imobiliarias": {
+      "termos": [
+        "imobiliária",
+        "corretor de imóveis"
+      ],
+      "categorias": "imobili|corretor|im[óo]veis|incorporad"
+    },
+    "academias": {
+      "termos": [
+        "academia",
+        "crossfit",
+        "studio de pilates"
+      ],
+      "categorias": "academia|gin[áa]stica|crossfit|pilates|personal|muscula[çc]|fitness"
+    },
+    "moveis": {
+      "termos": [
+        "móveis planejados",
+        "loja de decoração"
+      ],
+      "categorias": "m[óo]veis|marcenaria|decora[çc]|planejados|interiores|colch"
+    },
+    "hotelaria": {
+      "termos": [
+        "pousada",
+        "hotel"
+      ],
+      "categorias": "hotel|pousada|hospedagem|resort|hostel|chal[ée]"
+    }
+  }
+}

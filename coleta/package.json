@@ -1,0 +1,13 @@
+{
+  "name": "coleta",
+  "private": true,
+  "description": "Coleta de concorrentes e de anuncios ativos a partir de dados publicos",
+  "dependencies": {
+    "playwright-core": "^1.62.0"
+  },
+  "scripts": {
+    "coletar": "node coletar.js",
+    "medir": "node medir.js",
+    "instagram": "node instagram.js"
+  }
+}

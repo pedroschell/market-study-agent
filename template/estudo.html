@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITULO}} — Estudo de Mercado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="tema.css">
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================================================================
+     TEMPLATE DE ESTUDO DE MERCADO
+
+     A ordem das secoes e fixa e segue o CATALOGO.md. Nao reordenar sem
+     mudar o catalogo junto — e o que garante que todo cliente receba o
+     mesmo produto.
+
+     Secao sem dado: APAGUE a secao inteira. Nunca deixe placeholder no
+     documento entregue.
+
+     Componentes disponiveis (cada um aparece uma vez abaixo, comentado):
+       .lead        destaque de abertura
+       .findings    achados numerados
+       .stats       numeros grandes lado a lado
+       .tw + table  tabela com scroll na tela e sem scroll no papel
+       .cards       fichas de concorrente
+       .note        caixa de observacao
+       ul.clean     lista com marcador de traco
+       ol.steps     lista numerada de acoes
+       .src         bloco de fontes
+
+     Graficos (nenhum usa biblioteca):
+       .mapa-box    mapa por municipio — gere com mapa/gerar-mapa.py
+       .bars        barras horizontais (share of voice, seguidores)
+       ul.tline     linha do tempo (ha quanto tempo cada um veicula)
+       .vs          comparativo lado a lado (cliente x concorrente)
+     Marque o CLIENTE com class="own" na linha dele — e o que torna
+     o relatorio comparativo em vez de um mapa onde ele nao aparece.
+     =================================================================== -->
+
+<header class="top">
+  <div class="brandline">
+    <p class="eyebrow">Estudo de mercado · {{MES}}/{{ANO}}</p>
+    <img class="brand" src="assets/logo.png" alt="Logo">
+  </div>
+  <h1>{{TITULO — a tese, nao o nome da empresa}}</h1>
+  <p class="dek">{{Uma frase dizendo o que o documento responde.}}</p>
+  <div class="meta">
+    <span><b>Cliente</b> {{EMPRESA}}</span>
+    <span><b>Praça</b> {{CIDADE/REGIÃO}}</span>
+    <span><b>Coleta</b> {{DD/MM/AAAA}}</span>
+  </div>
+</header>
+
+
+<!-- 1. EM RESUMO — o que o cliente le se ler so uma pagina -->
+<section>
+  <h2>Em resumo</h2>
+
+  <div class="lead">
+    <p>{{A tese em um paragrafo. Sai do achado central (8.1): uma frase
+    com numero que reposiciona o problema.}}</p>
+  </div>
+
+  <ol class="findings">
+    <li>
+      <span class="fnum">1</span>
+      <div>
+        <h3>{{Achado com numero no titulo}}</h3>
+        <p>{{Uma ou duas frases. Sem rodeio.}}</p>
+      </div>
+    </li>
+    <li>
+      <span class="fnum">2</span>
+      <div>
+        <h3>{{Achado 2}}</h3>
+        <p>{{...}}</p>
+      </div>
+    </li>
+    <li>
+      <span class="fnum">3</span>
+      <div>
+        <h3>{{Achado 3}}</h3>
+        <p>{{...}}</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+<!-- 2. O MERCADO — bloco A do catalogo: territorio, demanda, contexto -->
+<section>
+  <h2>{{Titulo que ja diz o achado do mercado}}</h2>
+
+  <div class="col">
+    <p>{{Contexto. Regulacao, tributo ou evento datado — sempre com fonte.}}</p>
+  </div>
+
+  <!-- .stats: no papel vira 4 colunas fixas. Use 4 numeros, ou 2. -->
+  <div class="stats">
+    <div class="stat hi"><span class="n">{{NUM}}</span><span class="l">{{o que e}}</span></div>
+    <div class="stat"><span class="n">{{NUM}}</span><span class="l">{{o que e}}</span></div>
+    <div class="stat"><span class="n">{{NUM}}</span><span class="l">{{o que e}}</span></div>
+    <div class="stat"><span class="n">{{NUM}}</span><span class="l">{{o que e}}</span></div>
+  </div>
+
+  <!-- Mapa: rode `python3 ../mapa/gerar-mapa.py --uf NN --dados d.json
+       --saida m.html --rotulos auto` e cole a saida aqui dentro. -->
+  <figure class="fig">
+    <figcaption>{{Indicador}} por município · {{praça}} · IBGE {{ano}}</figcaption>
+    <!-- @@COLE_O_MAPA_AQUI@@ -->
+  </figure>
+
+  <div class="col">
+    <h3>{{Por que isso importa para ele}}</h3>
+    <p>{{Traducao do dado em consequencia comercial.}}</p>
+  </div>
+</section>
+
+
+<!-- 3. QUEM SAO OS CONCORRENTES — bloco B -->
+<section>
+  <h2>Quem são os concorrentes</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h4>{{Concorrente}}</h4>
+      <span class="handle">{{@perfil ou site}}</span>
+      <dl>
+        <dt>Preço</dt><dd>{{R$ x/mês}}</dd>
+        <dt>Anúncios</dt><dd>{{n ativos}}</dd>
+        <dt>Desde</dt><dd>{{DD/MM/AAAA}}</dd>
+        <dt>Nota</dt><dd>{{x,x — n avaliações}}</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h4>{{Concorrente}}</h4>
+      <span class="handle">{{@perfil}}</span>
+      <dl>
+        <dt>Preço</dt><dd>{{...}}</dd>
+        <dt>Anúncios</dt><dd><span class="pill ok">{{rótulo}}</span></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="tag">Concorrência indireta</span>
+    <p>{{Quem disputa a mesma impressao sem vender o mesmo — infla o CPM.}}</p>
+  </div>
+</section>
+
+
+<!-- 4. QUEM ESTA ANUNCIANDO — bloco C. O NUCLEO DO PRODUTO. -->
+<section>
+  <h2>{{Titulo que ja entrega a leitura de midia paga}}</h2>
+
+  <div class="col">
+    <p>{{A leitura, nao a tabela. Ex.: "voce disputa 140 anuncios e ignora 2.360".}}</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>Anunciantes ativos · {{fonte e data}}</caption>
+      <thead>
+        <tr><th>Anunciante</th><th>Anúncios</th><th>Ativo desde</th><th>O site mede com</th></tr>
+      </thead>
+      <tbody>
+        <!-- tr.mark destaca a linha do CLIENTE dentro do mercado -->
+        <tr class="mark"><td>{{CLIENTE}}</td><td>{{n}}</td><td>{{data}}</td><td>{{Meta}}</td></tr>
+        <tr><td>{{Concorrente}}</td><td>{{n}}</td><td>{{data}}</td><td>{{Meta, Google}}</td></tr>
+        <tr class="tot"><td>Total do mercado</td><td>{{n}}</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="fig">
+    <figcaption>Anúncios ativos por termo buscado · {{fonte}}</figcaption>
+    <ul class="bars">
+      <li><span class="bl">{{termo}}</span>
+          <span class="bt"><i style="--w:100%"></i></span><span class="bv">{{n}}</span></li>
+      <li><span class="bl">{{termo}}</span>
+          <span class="bt"><i style="--w:60%"></i></span><span class="bv">{{n}}</span></li>
+      <!-- own = o termo onde o CLIENTE aparece -->
+      <li class="own"><span class="bl">{{termo}}</span>
+          <span class="bt"><i style="--w:12%"></i></span><span class="bv">{{n}}</span></li>
+    </ul>
+    <p class="fnote">{{A leitura da barra, nao a repeticao do numero.}}</p>
+  </figure>
+
+  <figure class="fig">
+    <figcaption>Há quanto tempo cada concorrente veicula · {{periodo}}</figcaption>
+    <!-- --x = onde comeca na linha do tempo; --w = quanto dura. Ambos em %. -->
+    <ul class="tline">
+      <li><span class="tll">{{Concorrente}}</span>
+          <span class="tlt"><i style="--x:0%;--w:100%"></i></span><span class="tlv">{{n}}</span></li>
+      <li><span class="tll">{{Concorrente}}</span>
+          <span class="tlt"><i style="--x:55%;--w:45%"></i></span><span class="tlv">{{n}}</span></li>
+      <li class="own"><span class="tll">{{CLIENTE}}</span>
+          <span class="tlt"><i style="--x:90%;--w:10%"></i></span><span class="tlv">{{n}}</span></li>
+    </ul>
+    <p class="fnote">{{Quem opera ha anos e quem entrou semana passada.}}</p>
+  </figure>
+</section>
+
+
+<!-- 5. PRESENCA DIGITAL — bloco D -->
+<section>
+  <h2>{{Titulo}}</h2>
+  <div class="tw">
+    <table>
+      <caption>Presença por canal · {{data}}</caption>
+      <thead><tr><th>Empresa</th><th>Instagram</th><th>TikTok</th><th>YouTube</th></tr></thead>
+      <tbody>
+        <tr class="mark"><td>{{CLIENTE}}</td><td>{{n}}</td><td>—</td><td>—</td></tr>
+        <tr><td>{{Concorrente}}</td><td>{{n}}</td><td>{{n}}</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="fig">
+    <figcaption>{{Metrica}} · cliente e maior concorrente</figcaption>
+    <div class="vs">
+      <div class="vs-side own"><span class="vn">{{n}}</span><span class="vl">{{CLIENTE}}</span></div>
+      <div class="vs-gap"><span>{{diferenca}}</span></div>
+      <div class="vs-side"><span class="vn">{{n}}</span><span class="vl">{{Concorrente}}</span></div>
+    </div>
+  </figure>
+</section>
+
+
+<!-- 6. SITE E CONVERSAO — bloco E -->
+<section>
+  <h2>{{Titulo}}</h2>
+  <div class="col">
+    <p>{{Fluxo do clique ao contato, comunicacao, gatilhos. Onde o lead evapora.}}</p>
+  </div>
+  <ul class="clean">
+    <li>{{Gap concreto, comparando com concorrente}}</li>
+    <li>{{Pixel/GTM: quem otimiza e quem esta no escuro}}</li>
+    <li>{{PageSpeed: numero, nao adjetivo}}</li>
+  </ul>
+</section>
+
+
+<!-- 7. REPUTACAO — bloco F -->
+<section>
+  <h2>{{Titulo}}</h2>
+  <div class="note">
+    <span class="tag">O que reclamam dos concorrentes</span>
+    <p>{{Temas recorrentes nas avaliacoes de 1-2 estrelas. E a brecha de
+    posicionamento — a dor da categoria nas palavras de quem comprou.}}</p>
+  </div>
+</section>
+
+
+<!-- 8. PRECO E ATENDIMENTO — bloco G -->
+<section>
+  <h2>{{Titulo}}</h2>
+  <div class="tw">
+    <table>
+      <caption>Preço e tempo de resposta · {{data}}</caption>
+      <thead><tr><th>Empresa</th><th>Preço</th><th>Resposta no WhatsApp</th></tr></thead>
+      <tbody>
+        <tr class="mark"><td>{{CLIENTE}}</td><td>{{R$}}</td><td>{{tempo}}</td></tr>
+        <tr><td>{{Concorrente}}</td><td>{{R$}}</td><td class="pos">{{tempo}}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- 8b. O QUE DIZER NOS ANUNCIOS — cada ideia sai de um achado deste estudo -->
+<section>
+  <h2>O que dizer nos anúncios</h2>
+  <div class="col">
+    <p>{{Como a categoria anuncia hoje e por que fazer igual vira disputa por preco.}}</p>
+  </div>
+  <div class="col">
+    <h3>{{1. Ideia ligada ao achado 1}}</h3>
+    <p>{{O que mostrar, com o numero do estudo que sustenta.}}</p>
+    <h3>{{2. Ideia ligada ao achado 2}}</h3>
+    <p>{{...}}</p>
+    <h3>{{3. Ideia ligada ao achado 3}}</h3>
+    <p>{{...}}</p>
+  </div>
+</section>
+
+
+<!-- 9. O QUE FAZER — 8.3, ordenado por esforco x impacto -->
+<section>
+  <h2>O que fazer</h2>
+  <ol class="steps">
+    <li>{{Movimento 1 — o mais barato e de maior impacto}}</li>
+    <li>{{Movimento 2}}</li>
+    <li>{{Movimento 3}}</li>
+  </ol>
+
+  <div class="col">
+    <h3>O que não fazer</h3>
+    <p>{{8.4 — vale tanto quanto a recomendacao.}}</p>
+  </div>
+</section>
+
+
+<!-- 9b. O QUE FALTA — o que so o cliente sabe -->
+<section>
+  <h2>O que falta para fechar o plano</h2>
+  <div class="col">
+    <p>{{O que so o cliente sabe e sem o que qualquer meta seria chute:
+    margem por venda, tempo medio de cliente, conversa que vira venda.}}</p>
+  </div>
+  <ul class="clean">
+    <li>{{Pendencia 1}}</li>
+  </ul>
+</section>
+
+
+<!-- 10. LIMITES — 8.5. Escreva de forma que venda o produto 2:
+     cada "nao foi possivel medir" e uma linha do proximo servico. -->
+<section>
+  <h2>O que este levantamento não mediu</h2>
+  <ul class="clean">
+    <li>{{Ex.: parcela de impressoes — so dentro da conta de anuncios}}</li>
+    <li>{{Ex.: de onde vem a venda hoje — exige o CRM}}</li>
+    <li>{{Limite da amostra da biblioteca de anuncios}}</li>
+  </ul>
+</section>
+
+
+<!-- 11. FONTES — 8.6. Toda afirmacao externa clicavel.
+     No papel a URL e impressa depois do texto (regra do tema). -->
+<section class="src">
+  <h2>Fontes</h2>
+
+  <h3>{{Tema}}</h3>
+  <ul>
+    <li><a href="{{url}}">{{Titulo da fonte}}</a> — {{o que sustenta}}</li>
+  </ul>
+
+  <h3>Cliente e concorrentes</h3>
+  <ul>
+    <li><a href="{{url}}">{{Perfil ou site}}</a></li>
+  </ul>
+</section>
+
+</div>
+
+<!-- Rodape: so aparece no PDF, repetido em todas as paginas. -->
+<footer class="rodape">{{EMPRESA}} · Estudo de mercado · {{MES}}/{{ANO}}</footer>
+</body>
+</html>

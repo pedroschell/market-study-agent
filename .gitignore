@@ -1,0 +1,46 @@
+# Configuração local: as suas cidades.
+# O modelo versionado, sem cidade real, é coleta/praca.example.json.
+coleta/praca.json
+
+# Coleta bruta e dado de terceiro — nunca versionar.
+dados/
+
+# Estudos gerados (HTML e PDF de cliente)
+saida/
+estudos/
+
+# Cache de malha e nomes do IBGE
+.cache/
+
+# Node
+node_modules/
+package-lock.json
+
+# Java / Maven
+target/
+*.class
+
+# Segredos
+.env
+.env.*
+!.env.example
+credentials.json
+*.pem
+*.key
+
+# Sistema
+.DS_Store
+
+# Claude Code: configuração pessoal de cada máquina
+.claude/settings.local.json
+
+# Saídas de revisão e PDF, caso alguém rode fora de estudos/
+revisao/
+*.pdf
+
+# Lista local de termos proibidos (clientes, outros projetos) — lida pelo verificar.js
+.sensivel.local
+
+# Python
+__pycache__/
+*.pyc

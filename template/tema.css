@@ -1,0 +1,425 @@
+/* ============================================================
+   TEMA — Estudo de Mercado
+   Direcao "Painel": neutro frio, borda de 1px, numeral
+   monoespacado. Aprovado em 23/08/2026.
+
+   EDITE A VONTADE. Este arquivo e seu.
+
+   Onde mexer primeiro:
+     :root       → paleta. Muda aqui, o documento inteiro acompanha.
+     --acc       → o unico acento. Tudo que destaca usa ele.
+     --n0..--n4  → a escala do mapa (claro → escuro, mesma matiz)
+     body        → fonte e corpo do texto
+
+   O bloco "IMPRESSAO / PDF" no fim controla o papel. Mexer nele
+   sem testar quebra a paginacao — gere o PDF e olhe pagina a
+   pagina depois de alterar.
+
+   Fontes: IBM Plex Sans (texto) + IBM Plex Mono (numero).
+   O <link> fica no <head> do estudo.html.
+   ============================================================ */
+
+:root{
+  --paper:#FCFCFD;
+  --surface:#FFFFFF;
+  --surface-2:#F4F4F6;
+  --ink:#0B0B0F;
+  --ink-2:#3F3F49;
+  --muted:#71717A;
+  --line:#E3E3E9;
+  --acc:#1A5B6B;
+  --acc-soft:#E4EFF2;
+  --good:#2F6B4F;
+  --warn:#8A5A12;
+  --crit:#8C3524;
+  /* escala sequencial do mapa: uma matiz so, claro para escuro */
+  --n0:#DFEBEE; --n1:#AECDD5; --n2:#75A7B5; --n3:#2E7F92; --n4:#12505E;
+  --raio:7px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0C0D10; --surface:#141619; --surface-2:#1B1E22;
+    --ink:#F0F1F4; --ink-2:#B8BCC4; --muted:#82868F; --line:#25282E;
+    --acc:#5FB3C7; --acc-soft:#12262C;
+    --good:#7FB894; --warn:#D0A055; --crit:#D2836F;
+    --n0:#232D34; --n1:#2C4750; --n2:#3E6B78; --n3:#4F91A2; --n4:#78C2D4;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0C0D10; --surface:#141619; --surface-2:#1B1E22;
+  --ink:#F0F1F4; --ink-2:#B8BCC4; --muted:#82868F; --line:#25282E;
+  --acc:#5FB3C7; --acc-soft:#12262C;
+  --good:#7FB894; --warn:#D0A055; --crit:#D2836F;
+  --n0:#232D34; --n1:#2C4750; --n2:#3E6B78; --n3:#4F91A2; --n4:#78C2D4;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  font-size:16.5px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px 90px}
+.col{max-width:66ch}
+
+/* ---------- cabecalho ---------- */
+.top{border-bottom:1px solid var(--line);padding:56px 0 26px;margin-bottom:44px}
+.brandline{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;margin:0 0 16px;
+}
+.brand{height:30px;width:auto;flex:0 0 auto}
+.eyebrow{
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--acc);font-weight:600;margin:0 0 16px;
+}
+.brandline .eyebrow{margin-bottom:0}
+/* rodape: existe so no PDF */
+.rodape{display:none}
+h1{
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-weight:600;font-size:clamp(32px,5vw,50px);
+  line-height:1.04;letter-spacing:-.028em;margin:0 0 16px;
+  text-wrap:balance;
+}
+.dek{font-size:18.5px;color:var(--ink-2);margin:0;max-width:56ch;line-height:1.5}
+.meta{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:26px;font-size:13.5px;color:var(--muted)}
+.meta b{color:var(--ink-2);font-weight:600}
+
+/* ---------- secoes e texto ---------- */
+section{margin:0 0 58px}
+h2{
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-weight:600;font-size:clamp(23px,3vw,30px);
+  letter-spacing:-.022em;line-height:1.12;margin:0 0 20px;
+  text-wrap:balance;
+}
+h3{
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-weight:600;font-size:18px;letter-spacing:-.01em;
+  margin:32px 0 8px;
+}
+p{margin:0 0 14px}
+a{color:var(--acc);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:3px}
+strong{font-weight:600}
+
+.lead{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--raio);
+  padding:26px 30px;margin:0 0 32px;font-size:18px;line-height:1.55;
+}
+.lead p:last-child{margin-bottom:0}
+
+/* ---------- achados numerados ---------- */
+.findings{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+.findings li{display:grid;grid-template-columns:34px 1fr;gap:16px;align-items:start}
+.fnum{
+  font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:600;
+  color:var(--acc);line-height:1.25;font-variant-numeric:tabular-nums;
+}
+.findings h3{margin:0 0 4px;font-size:18px}
+.findings p{margin:0;color:var(--ink-2);font-size:16px}
+
+/* ---------- faixa de numeros ---------- */
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--raio);overflow:hidden;margin:30px 0;
+}
+.stat{background:var(--surface);padding:20px 22px}
+.stat .n{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;
+  font-size:29px;line-height:1;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;display:block;margin-bottom:8px;
+}
+.stat .l{font-size:12.5px;color:var(--muted);line-height:1.4;display:block}
+.stat.hi .n{color:var(--acc)}
+
+/* ---------- tabelas ---------- */
+.tw{
+  overflow-x:auto;margin:26px 0;border:1px solid var(--line);
+  border-radius:var(--raio);background:var(--surface);
+}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14.5px}
+caption{
+  caption-side:top;text-align:left;padding:16px 20px 12px;
+  font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--line);font-weight:600;
+}
+th,td{padding:10px 18px;text-align:right;border-bottom:1px solid var(--line)}
+th{
+  font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface-2);white-space:nowrap;
+}
+th:first-child,td:first-child{text-align:left}
+td{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+td:first-child{font-family:"IBM Plex Sans",sans-serif}
+tbody tr:last-child td{border-bottom:none}
+tr.mark td{background:var(--acc-soft);color:var(--ink);font-weight:600}
+tr.tot td{background:var(--surface-2);font-weight:600;color:var(--ink)}
+.pos{color:var(--acc);font-weight:600}
+
+/* ============ GRAFICOS ============
+   Nenhum usa biblioteca. Barra, linha do tempo e comparativo sao
+   HTML + CSS; o mapa e SVG. Tudo imprime identico a tela.        */
+
+.fig{margin:0 0 30px}
+.fig figcaption{
+  font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:16px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);
+}
+.fnote{font-size:14.5px;color:var(--ink-2);margin:14px 0 0;max-width:60ch}
+
+/* --- mapa: gerado por mapa/gerar-mapa.py --- */
+.mapa-box{display:flex;flex-direction:column;align-items:center;gap:20px}
+.mapa{width:auto;max-width:100%;max-height:460px;height:auto;display:block}
+.mun{stroke:var(--paper);stroke-width:130;stroke-linejoin:round}
+.n0{fill:var(--n0)}.n1{fill:var(--n1)}.n2{fill:var(--n2)}
+.n3{fill:var(--n3)}.n4{fill:var(--n4)}
+/* vizinhos fora do recorte: dao continuidade sem competir por atencao */
+.ctx{fill:var(--surface-2);stroke:var(--paper)}
+/* silhueta da UF mostrando onde a praca fica */
+.localizador{width:104px;height:auto;align-self:flex-end;margin-top:-12px}
+.loc-uf{fill:var(--surface-2);stroke:none}
+.loc-alvo{fill:var(--acc);stroke:var(--acc);stroke-width:2400}
+.rot{
+  font-family:"IBM Plex Sans",sans-serif;font-weight:600;fill:var(--ink);
+  text-anchor:middle;paint-order:stroke;stroke:var(--paper);stroke-width:150px;
+}
+.ramp{
+  list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;
+  justify-content:center;gap:6px 18px;font-size:11.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.ramp li{display:flex;align-items:center;gap:7px}
+.sw{width:22px;height:11px;display:block;border-radius:2px;flex:0 0 auto}
+.sw.n0{background:var(--n0)}.sw.n1{background:var(--n1)}.sw.n2{background:var(--n2)}
+.sw.n3{background:var(--n3)}.sw.n4{background:var(--n4)}
+
+/* --- barras horizontais: share of voice, seguidores, avaliacoes --- */
+.bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.bars li{display:grid;grid-template-columns:minmax(110px,168px) 1fr 66px;gap:14px;align-items:center}
+.bl{font-size:14px;color:var(--ink-2)}
+.bt{display:block;height:18px;background:var(--acc-soft);border-radius:var(--raio);overflow:hidden}
+.bt i{display:block;height:100%;width:var(--w);background:var(--acc);opacity:.45;border-radius:var(--raio)}
+.bars li.own .bt i{opacity:1}
+.bars li.own .bl{font-weight:600;color:var(--ink)}
+.bv{
+  font-family:"IBM Plex Mono",monospace;font-size:13.5px;text-align:right;
+  color:var(--ink-2);font-variant-numeric:tabular-nums;
+}
+.bars li.own .bv{color:var(--acc);font-weight:600}
+
+/* --- linha do tempo: ha quanto tempo cada concorrente veicula --- */
+ul.tline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+ul.tline li{display:grid;grid-template-columns:minmax(90px,124px) 1fr minmax(28px,auto);gap:14px;align-items:center}
+.tll{font-size:14px;color:var(--ink-2)}
+.tlt{display:block;height:15px;background:var(--acc-soft);border-radius:var(--raio);position:relative;overflow:hidden}
+.tlt i{position:absolute;left:var(--x);width:var(--w);top:0;bottom:0;background:var(--acc);opacity:.45;border-radius:var(--raio)}
+ul.tline li.own .tlt i{opacity:1}
+ul.tline li.own .tll{font-weight:600;color:var(--ink)}
+.tlv{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);
+  text-align:right;font-variant-numeric:tabular-nums;
+}
+
+/* --- comparativo lado a lado: cliente contra concorrente --- */
+.vs{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.vs-side{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--raio);
+  padding:18px 24px;flex:1 1 150px;
+}
+.vn{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:31px;line-height:1;
+  letter-spacing:-.01em;display:block;font-variant-numeric:tabular-nums;
+}
+.vl{font-size:12.5px;color:var(--muted);display:block;margin-top:6px}
+.vs-side.own{border-color:var(--acc);border-width:2px}
+.vs-side.own .vn{color:var(--acc)}
+.vs-gap{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--muted)}
+
+/* ---------- fichas de concorrente ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:26px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--raio);padding:20px 22px}
+.card h4{font-size:17.5px;font-weight:600;letter-spacing:-.01em;margin:0 0 2px}
+.card .handle{font-size:12.5px;color:var(--muted);margin:0 0 14px;display:block}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:14.5px}
+.card dt{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;padding-top:3px}
+.card dd{margin:0;color:var(--ink-2);font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.pill{
+  display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;
+  padding:3px 9px;border:1px solid currentColor;border-radius:99px;font-weight:600;
+  font-family:"IBM Plex Sans",sans-serif;
+}
+.pill.ok{color:var(--good)}
+.pill.mid{color:var(--warn)}
+.pill.bad{color:var(--crit)}
+
+/* ---------- listas ---------- */
+ul.clean{list-style:none;padding:0;margin:18px 0;display:flex;flex-direction:column;gap:12px}
+ul.clean li{padding-left:20px;position:relative;color:var(--ink-2)}
+ul.clean li::before{content:"";position:absolute;left:0;top:.68em;width:9px;height:2px;background:var(--acc)}
+
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:20px 0;display:flex;flex-direction:column;gap:16px}
+/* O numero fica fora do fluxo: o item aceita texto misturado com <b> e <a>
+   sem virar varias celulas, o que aconteceria com display:grid. */
+ol.steps li{counter-increment:s;position:relative;padding-left:40px;color:var(--ink-2)}
+ol.steps li::before{
+  content:counter(s);font-family:"IBM Plex Mono",monospace;font-size:16px;
+  font-weight:600;color:var(--acc);line-height:1.5;
+  position:absolute;left:0;top:0;
+}
+
+/* ---------- observacao ---------- */
+.note{
+  border:1px solid var(--line);border-left:3px solid var(--acc);
+  background:var(--surface);border-radius:var(--raio);padding:20px 24px;margin:26px 0;
+}
+.note p{margin:0;font-size:16px;color:var(--ink-2)}
+.note p + p{margin-top:11px}
+.note .tag{
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--acc);font-weight:600;display:block;margin-bottom:8px;
+}
+
+/* ---------- fontes ---------- */
+.src{border-top:1px solid var(--line);padding-top:28px}
+.src ul{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px}
+.src li{font-size:14.5px;color:var(--muted);line-height:1.5}
+.src a{word-break:break-word}
+.src h3{
+  font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink);margin:0 0 12px;font-weight:600;
+}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 60px}
+  .findings li{grid-template-columns:28px 1fr;gap:12px}
+  .fnum{font-size:18px}
+  .lead{padding:20px 22px;font-size:17px}
+  .bars li{grid-template-columns:96px 1fr 56px;gap:9px}
+  ul.tline li{grid-template-columns:84px 1fr minmax(24px,auto);gap:9px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ IMPRESSAO / PDF ============ */
+@page{ size:A4; margin:14mm 13mm 19mm }
+@page:first{ margin:16mm 13mm 15mm }
+
+@media print{
+  html,body{ background:#fff!important; color:#0B0B0F!important }
+  body{ font-size:9.6pt; line-height:1.5 }
+  .wrap{ max-width:none; padding:0 }
+
+  /* fundos e cores so saem com isto */
+  .lead,.note,.stat,.card,.tw,th,tr.mark td,tr.tot td,caption,.stats,
+  .bt,.bt i,.tlt,.tlt i,.sw,.vs-side,.mun{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  .top{ padding:0 0 7mm; margin-bottom:8mm; border-bottom:.6pt solid #C9C9D2 }
+  .brandline{ margin-bottom:4.5mm }
+  .brand{ height:8mm; -webkit-print-color-adjust:exact; print-color-adjust:exact }
+
+  /* Repete em todas as paginas. Fica dentro da margem inferior do @page,
+     por isso o bottom negativo — sem ele o texto da pagina passa por baixo. */
+  .rodape{
+    display:block; position:fixed; left:0; right:0; bottom:0;
+    padding-top:2mm; background:#fff;
+    font-size:6.6pt; letter-spacing:.06em; text-transform:uppercase;
+    color:#8A8A94; text-align:right;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  h1{ font-size:27pt; line-height:1.02; margin-bottom:4mm }
+  .dek{ font-size:11.6pt; line-height:1.4 }
+  .meta{ margin-top:5mm; font-size:8.2pt; gap:3px 16px }
+
+  section{ margin:0 0 8mm }
+  h2{ font-size:15pt; margin:0 0 4mm; break-after:avoid; page-break-after:avoid }
+  h3{ font-size:11pt; margin:5mm 0 1.5mm; break-after:avoid; page-break-after:avoid }
+  p{ margin:0 0 2.6mm }
+  .col{ max-width:none }
+
+  .lead{ padding:5mm 6mm; margin-bottom:6mm; font-size:10.4pt; break-inside:avoid }
+
+  .findings{ gap:4.2mm }
+  .findings li{ grid-template-columns:8mm 1fr; gap:3mm; break-inside:avoid; page-break-inside:avoid }
+  .fnum{ font-size:13pt }
+  .findings h3{ font-size:10.8pt; margin:0 0 1mm }
+  .findings p{ font-size:9.4pt }
+
+  /* media query de tela colapsaria as colunas no papel */
+  .stats{ grid-template-columns:repeat(4,1fr)!important; margin:5mm 0; break-inside:avoid }
+  .stat{ padding:3.6mm 4mm }
+  .stat .n{ font-size:15pt; margin-bottom:1.4mm }
+  .stat .l{ font-size:7.2pt; line-height:1.3 }
+
+  .tw{ overflow:visible!important; margin:5mm 0; break-inside:avoid; page-break-inside:avoid }
+  table{ min-width:0!important; width:100%; font-size:8.4pt }
+  caption{ padding:3.2mm 4mm 2.2mm; font-size:7.4pt }
+  th,td{ padding:1.8mm 3mm }
+  th{ font-size:7.2pt }
+
+  /* --- graficos no papel --- */
+  .fig{ margin:0 0 6mm; break-inside:avoid; page-break-inside:avoid }
+  .fig figcaption{ font-size:7.4pt; margin-bottom:3mm; padding-bottom:1.6mm }
+  .fnote{ font-size:8.6pt; margin-top:2.6mm }
+
+  .mapa-box{ gap:4mm }
+  .ctx{ fill:#F0F0F3 }
+  .localizador{ width:20mm; margin-top:-3mm }
+  .mapa{ max-height:88mm }
+  .rot{ stroke-width:190px }
+  .ramp{ font-size:7pt; gap:2mm 5mm }
+  .sw{ width:14px; height:8px }
+
+  .bars{ gap:2.2mm }
+  .bars li{ grid-template-columns:34mm 1fr 16mm; gap:3mm }
+  .bl,.tll{ font-size:8.6pt }
+  .bt{ height:3.4mm }
+  .bv,.tlv{ font-size:8.2pt }
+
+  ul.tline{ gap:2mm }
+  ul.tline li{ grid-template-columns:27mm 1fr 6mm; gap:3mm }
+  .tlt{ height:3mm }
+
+  .vs-side{ padding:3.6mm 4.5mm }
+  .vn{ font-size:16pt }
+  .vl{ font-size:7.6pt }
+
+  /* grid vira bloco empilhado */
+  .cards{ display:block!important; margin:5mm 0 }
+  .cards>.card{ padding:3.6mm 4.5mm; margin-bottom:3mm; break-inside:avoid; page-break-inside:avoid }
+  .card h4{ font-size:10.6pt }
+  .card .handle{ font-size:8pt; margin-bottom:2.4mm }
+  .card dl{ font-size:9pt; gap:1.4mm 4mm }
+  .card dt{ font-size:7.4pt }
+
+  ul.clean{ gap:2.2mm; margin:3.4mm 0 }
+  ul.clean li{ break-inside:avoid }
+  ol.steps{ gap:3mm; margin:4mm 0 }
+  ol.steps li{ padding-left:9mm; break-inside:avoid }
+  ol.steps li::before{ font-size:10pt }
+
+  .note{ padding:3.6mm 4.5mm; margin:4.2mm 0; break-inside:avoid; page-break-inside:avoid }
+  .note p{ font-size:9.2pt }
+  .note .tag{ font-size:7.4pt; margin-bottom:1.8mm }
+
+  /* URL impressa, senao o link e inutil no papel */
+  .src{ padding-top:6mm; break-inside:auto }
+  .src h3{ font-size:7.8pt; margin-bottom:2.4mm }
+  .src ul{ gap:1.8mm; margin-bottom:5mm }
+  .src li{ font-size:8.2pt; line-height:1.4; break-inside:avoid }
+  .src a{ color:#3F3F49!important; text-decoration:none; overflow-wrap:anywhere }
+  .src a::after{
+    content:" " attr(href);
+    font-size:6.4pt; color:#71717A;
+    overflow-wrap:anywhere; word-break:break-all;
+  }
+}

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Barra o commit se verificar.js encontrar segredo ou dado de cliente.
+# Ative uma vez por clone:  git config core.hooksPath .githooks
+node "$(git rev-parse --show-toplevel)/verificar.js" || {
+    echo ""
+    echo "Commit cancelado pelo verificar.js."
+    exit 1
+}

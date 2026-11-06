@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node estudo.js:*)",
+      "Bash(node montar.js:*)",
+      "Bash(node revisar.js:*)",
+      "Bash(node verificar.js:*)",
+      "Bash(opencli instagram profile:*)",
+      "Bash(opencli instagram user:*)",
+      "Bash(opencli instagram search:*)",
+      "Bash(opencli google search:*)",
+      "Bash(opencli google news:*)",
+      "Bash(opencli facebook profile:*)",
+      "Bash(opencli profile list:*)",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/so-leitura.js\""
+          }
+        ]
+      }
+    ]
+  }
+}
