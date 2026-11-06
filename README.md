@@ -1,4 +1,4 @@
-# estudo-mercado
+# market-study-agent
 
 Este projeto gera um **estudo de mercado e concorrência para negócios locais**
 usando só dados públicos. É uma arquitetura de agente construída sobre o
@@ -81,8 +81,8 @@ As decisões e os trade-offs estão em [`docs/arquitetura.md`](docs/arquitetura.
   pesquisa de Instagram fica menos completa.
 
 ```bash
-git clone https://github.com/pedroschell/estudo-mercado.git
-cd estudo-mercado
+git clone https://github.com/pedroschell/market-study-agent.git
+cd market-study-agent
 cd coleta && npm install && cd ..
 cp .claude/settings.sugerido.json .claude/settings.json   # permissões e hook de só-leitura
 git config core.hooksPath .githooks                      # verificar.js antes de cada commit
