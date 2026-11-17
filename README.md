@@ -1,5 +1,7 @@
 # market-study-agent
 
+**Português** | [English](README.en.md)
+
 Este projeto gera um **estudo de mercado e concorrência para negócios locais**
 usando só dados públicos. É uma arquitetura de agente construída sobre o
 [Claude Code](https://claude.com/claude-code).
